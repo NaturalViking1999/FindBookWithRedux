@@ -1,0 +1,193 @@
+* {
+    margin: 0 auto;
+}
+
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(86,100,205,1) 25%, rgba(0,212,255,1) 100%);
+}
+
+.header {
+    background: url("https://phonoteka.org/uploads/posts/2021-04/1618945000_26-phonoteka_org-p-bezhevii-fon-s-knigami-29.jpg");
+    background-size: 100%;
+    height: 120px;
+    padding: 20px 0 25px 0;
+    display: grid;
+    width: 100vw;
+}
+
+.title {
+    font-size: 30px;
+    color: white;
+    text-shadow: black 1px 1px 1px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.input {
+    width: 280px;
+    height: 30px;
+}
+
+.button {
+    height: 37px;
+}
+
+.selectorTitle {
+    float: left;
+    color: white;
+    text-shadow: black 1px 1px 1px;
+    font-family: sans-serif;
+}
+
+.selector {
+    float: left;
+    margin-right: 10px;
+    margin-top: 12px;
+}
+
+.selectorField {
+    margin-left: 5px;
+    padding: 5px 5px 5px 5px;
+}
+
+.loadingWheel {
+    margin-top: 10px;
+    width: 130px;
+    height: 130px;
+}
+
+.inscription {
+    margin-top: 100px;
+    color: antiquewhite;
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+    padding: 180px 180px 180px 180px;
+    border: 1px solid black;
+    border-style: double;
+    width: 250px;
+    background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(159,42,189,1) 39%, rgba(0,212,255,1) 100%);
+}
+
+.bookCard {
+    width: 240px;
+    border: 1px solid dimgrey;
+    font-family: sans-serif;
+    padding: 10px;
+    margin: 5px;
+    background: white;
+}
+
+.bookCover {
+    width: 130px;
+    margin-left: 55px;
+    margin-bottom: 10px;
+    box-shadow: grey 5px 5px 10px;
+    margin-top: 10px;
+}
+
+.categoryCard {
+    color: dimgrey;
+    text-decoration: underline;
+    font-size: 15px;
+}
+
+.titleCard {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.authorsList {
+    list-style-type: none;
+    margin-left: 0;
+    padding: 0;
+}
+
+.booksListContainer {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.totalItemsBookslist {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.loadMoreBooksList {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.buttonBooksList {
+    font-size: 20px;
+    background-color: aqua;
+    width: 300px;
+    margin-top: 30px;
+    margin-left: calc(50vw - 375px);
+    height: 30px;
+}
+
+.chosenBookInfo {
+    width: 1060px;
+    border: 1px solid dimgrey;
+    font-family: sans-serif;
+    padding: 10px;
+    margin: 10px;
+    display: grid;
+    grid-template-areas:
+    "cover content";
+    grid-template-columns: 250px 1fr;
+    background-color: white;
+}
+
+.bookCoverInfo {
+    grid-area: cover;
+    width: 250px;
+    box-shadow: grey 5px 5px 10px;
+}
+
+.contentInfo {
+    grid-area: content;
+    margin-left: 20px;
+}
+
+.categoriesListInfo {
+    color: dimgrey;
+    text-decoration: underline;
+    list-style-type: none;
+    font-size: 15px;
+    margin-left: 0;
+    padding: 0;
+}
+
+.titleInfo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.authorsListInfo {
+    list-style-type: none;
+    margin-left: 0;
+    padding: 0;
+}
+
+.description {
+    font-size: 15px;
+}
+
+.buttonInfo {
+    margin-top: 20px;
+    height: 30px;
+    width: 50px;
+}
+
+.gradient {
+    border: 5px skyblue;
+    border-style: groove;
+}
