@@ -10,7 +10,7 @@ const BookList = (props) => {
 
     const loadMoreBooksThunk = (e) => {
         e.preventDefault();
-        loadMoreBooks(searchingField, subject, sortingMethod, startIndex + 20);
+        loadMoreBooks(searchingField, subject, sortingMethod, startIndex + 30);
     }
 
     return (

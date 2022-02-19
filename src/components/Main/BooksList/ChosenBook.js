@@ -1,7 +1,7 @@
 import React from "react";
 
 const ChosenBook = (props) => {
-    const { categories, title, authors, description } = props.chosenBook;
+    const { categories, title, authors, description, infoLink } = props.chosenBook;
     const { thumbnail } = props.chosenBook.imageLinks;
 
     const listItems1 = authors.map((item, index) =>
@@ -20,6 +20,9 @@ const ChosenBook = (props) => {
                 <div className="titleInfo">{title}</div>
                 <ul className="authorsListInfo">{listItems1}</ul>
                 <div className="description">{description}</div>
+                <a href={infoLink} target="_blank">
+                    <p className="follow">Click here to follow the link to the book page in Google!</p>
+                </a>
                 <button className="buttonInfo" onClick={props.deleteChosenBook}>Back</button>
             </div>
         </div>

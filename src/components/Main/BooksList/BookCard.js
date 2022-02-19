@@ -7,6 +7,7 @@ const BookCard = (props) => {
 
     const showChosenBook = () => {
         setChosenBook(props.volumeInfo);
+        console.log(props.volumeInfo)
     }
 
     const listItems = authors.map((item, index) =>
@@ -15,7 +16,8 @@ const BookCard = (props) => {
 
     return (
         <div onClick={showChosenBook} className="bookCard">
-            <img className="bookCover" src={thumbnail} alt="Book cover" />
+            <img className="bookCover" src={thumbnail} alt="Book cover">
+            </img>
             <div>
                 <p className="categoryCard">{categories[0]}</p>
                 <p className="titleCard">{title}</p>

@@ -5,7 +5,7 @@ export const getBooks = (searchingField, subject, sortingMethod, startIndex) => 
     const searchStr = searchingField === '' ? 'books' : searchingField;
     const subjectStr = subject === 'all' ? '' : `+subject=${subject}`;
     const sortingStr = sortingMethod === 'relevance' ? '' : `&orderBy=${sortingMethod}`;
-    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchStr}${subjectStr}${sortingStr}&maxResults=20&startIndex=${startIndex}&key=AIzaSyCFNF8dc1XAd081PKOl7EDOBncGXAdrdpo`)
+    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchStr}${subjectStr}${sortingStr}&maxResults=30&startIndex=${startIndex}&key=AIzaSyCFNF8dc1XAd081PKOl7EDOBncGXAdrdpo`)
         .then(response => {
             const cleanData = (response) => {
 
@@ -21,6 +21,9 @@ export const getBooks = (searchingField, subject, sortingMethod, startIndex) => 
                             }
                             if (book.volumeInfo.hasOwnProperty('categories') === false) {
                                 book.volumeInfo['categories'] = [''];
+                            }
+                            if (book.volumeInfo.hasOwnProperty('infoLink') === false) {
+                                book.volumeInfo['infoLink'] = [''];
                             }
                             if (book.volumeInfo.hasOwnProperty('authors') === false) {
                                 book.volumeInfo['authors'] = [''];
