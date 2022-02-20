@@ -1,11 +1,11 @@
 import axios from "axios";
 import noImage from "../images/no-image.jpg"
 
-export const getBooks = (searchingField, subject, sortingMethod, startIndex) => {
-    const searchStr = searchingField === '' ? 'books' : searchingField;
-    const subjectStr = subject === 'all' ? '' : `+subject=${subject}`;
-    const sortingStr = sortingMethod === 'relevance' ? '' : `&orderBy=${sortingMethod}`;
-    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchStr}${subjectStr}${sortingStr}&maxResults=30&startIndex=${startIndex}&key=AIzaSyCFNF8dc1XAd081PKOl7EDOBncGXAdrdpo`)
+export const getBooks = (inputText, categoryName, sortingMethod, startIndex) => {
+    const inp = inputText === '' ? 'books' : inputText;
+    const cat = categoryName === 'all' ? '' : `+subject=${categoryName}`;
+    const sort = sortingMethod === 'relevance' ? '' : `&orderBy=${sortingMethod}`;
+    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${inp}${cat}${sort}&maxResults=30&startIndex=${startIndex}&key=AIzaSyCFNF8dc1XAd081PKOl7EDOBncGXAdrdpo`)
         .then(response => {
             const cleanData = (response) => {
 

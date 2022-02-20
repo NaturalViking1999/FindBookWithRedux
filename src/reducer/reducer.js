@@ -2,26 +2,23 @@ import { getBooks } from "./getBooks";
 import { uniqBy } from "lodash";
 
 // ACTION TYPES:
-const UPDATE_SEARCHING_FIELD_TEXT = 'UPDATE_SEARCHING_FIELD_TEXT';
-export const updateSearchingFieldText = (newText) => ({ type: UPDATE_SEARCHING_FIELD_TEXT, newText });
+const SEARCHING_FIELD = 'SEARCHING_FIELD';
+export const setSearchingField = (newText) => ({ type: SEARCHING_FIELD, newText });
 
-const UPDATE_SORTING_METHOD = 'UPDATE_SORTING_METHOD';
-export const updateSortingMethod = (newSortingMethod) => ({ type: UPDATE_SORTING_METHOD, newSortingMethod });
+const SET_SORTING_METHOD = 'SET_SORTING_METHOD';
+export const setSortingMethod = (newSortingMethod) => ({ type: SET_SORTING_METHOD, newSortingMethod });
 
-const UPDATE_SUBJECT = 'UPDATE_SUBJECT';
-export const updateSubject = (newSubject) => ({ type: UPDATE_SUBJECT, newSubject });
+const SET_CATEGORY = 'SET_CATEGORY';
+export const setCategory = (newCategory) => ({ type: SET_CATEGORY, newCategory });
 
-const ADD_FOUND_BOOKS = 'ADD_FOUND_BOOKS';
-export const addFoundBooks = (foundBooks) => ({ type: ADD_FOUND_BOOKS, foundBooks });
+const ADD_BOOKS = 'ADD_BOOKS';
+export const addBooks = (newBooks) => ({ type: ADD_BOOKS, newBooks });
 
 const SET_TOTAL_ITEMS = 'SET_TOTAL_ITEMS';
 export const setTotalItems = (totalItems) => ({ type: SET_TOTAL_ITEMS, totalItems });
 
 const LOAD_MORE = 'LOAD_MORE';
 export const loadMore = (newBooks, currentIndex) => ({ type: LOAD_MORE, newBooks, currentIndex });
-
-const RESET_OPTIONS = 'RESET_OPTIONS';
-export const resetOptions = () => ({ type: RESET_OPTIONS });
 
 const FETCHING_TOGGLE = 'FETCHING_TOGGLE';
 export const fetchingToggle = (fetchingStatus) => ({ type: FETCHING_TOGGLE, fetchingStatus });
@@ -35,11 +32,10 @@ export const deleteChosenBook = () => ({ type: DELETE_CHOSEN_BOOK });
 // FUNCTIONS:
 
 // Function search books
-export const searchBooks = (searchingField, subject, sortingMethod, startIndex) => {
+export const searchBooks = (inputText, categoryName, sortingMethod, startIndex) => {
     return (dispatch) => {
-        dispatch(resetOptions());
         dispatch(fetchingToggle("searching"));
-        getBooks(searchingField, subject, sortingMethod, startIndex)
+        getBooks(inputText, categoryName, sortingMethod, startIndex)
             .then(response => {
                 if (response === 'STOP') {
                     alert('There are not those books, what you search.');
@@ -50,20 +46,20 @@ export const searchBooks = (searchingField, subject, sortingMethod, startIndex) 
                     return;
                 }
                 dispatch(fetchingToggle(false));
-                dispatch(addFoundBooks(response.items));
+                dispatch(addBooks(response.items));
                 dispatch(setTotalItems(response.totalItems));
             })
     }
 };
 
 // Function load more books
-export const loadMoreBooks = (searchingField, subject, sortingMethod, startIndex) => {
+export const loadMoreBooks = (inputText, categoryName, sortingMethod, startIndex) => {
     return (dispatch) => {
         dispatch(fetchingToggle("loadingMore"));
-        getBooks(searchingField, subject, sortingMethod, startIndex)
+        getBooks(inputText, categoryName, sortingMethod, startIndex)
             .then(response => {
                 if (response === 'STOP') {
-                    alert('Sorry, there are no more books on your request.');
+                    alert('There are not those books, what you search.');
                     dispatch(fetchingToggle(false));
                     return;
                 } else if (response === 'ERROR') {
@@ -78,65 +74,58 @@ export const loadMoreBooks = (searchingField, subject, sortingMethod, startIndex
 
 // Initial State
 const initialState = {
-    books: [], searchingField: '', sortingMethod: 'relevance', subject: 'all',
-    totalItems: null, startIndex: 0, isFetching: false, chosenBook: false,
+    books: [], inputText: '', sortingMethod: 'relevance', categoryName: 'all',
+    totalItems: null, startIndex: 0, isFetching: false, chosenBook: false
 };
 
 // Reducer
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_SEARCHING_FIELD_TEXT:
+        case SEARCHING_FIELD:
             return {
                 ...state,
-                searchingField: action.newText,
+                inputText: action.newText
             };
-        case UPDATE_SORTING_METHOD:
+        case SET_SORTING_METHOD:
             return {
                 ...state,
-                sortingMethod: action.newSortingMethod,
+                sortingMethod: action.newSortingMethod
             };
-        case UPDATE_SUBJECT:
+        case SET_CATEGORY:
             return {
                 ...state,
-                subject: action.newSubject,
+                categoryName: action.newSubject
             };
-        case ADD_FOUND_BOOKS:
+        case ADD_BOOKS:
             return {
                 ...state,
-                books: uniqBy(action.foundBooks, 'id'),
+                books: uniqBy(action.newBooks, 'id')
             };
         case SET_TOTAL_ITEMS:
             return {
                 ...state,
-                totalItems: action.totalItems,
+                totalItems: action.totalItems
             };
         case LOAD_MORE:
             return {
                 ...state,
                 startIndex: action.currentIndex + 30,
-                books: uniqBy([...state.books, ...action.newBooks], 'id'),
-            };
-        case RESET_OPTIONS:
-            return {
-                ...state,
-                startIndex: 0,
-                books: [],
-                chosenBook: false,
+                books: uniqBy([...state.books, ...action.newBooks], 'id')
             };
         case FETCHING_TOGGLE:
             return {
                 ...state,
-                isFetching: action.fetchingStatus,
+                isFetching: action.fetchingStatus
             };
         case SET_CHOSEN_BOOK:
             return {
                 ...state,
-                chosenBook: action.chosenBook,
+                chosenBook: action.chosenBook
             };
         case DELETE_CHOSEN_BOOK:
             return {
                 ...state,
-                chosenBook: false,
+                chosenBook: false
             };
         default:
             return state;
